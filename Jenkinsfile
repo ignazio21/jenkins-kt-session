@@ -1,7 +1,4 @@
 pipeline {   
-  
-  agent any
-  
   stages {
     stage('checkout') {
       steps {
@@ -11,13 +8,17 @@ pipeline {
 
     stage('init') {
       steps {
-         sh 'terraform init'
+          container('terraform') {
+            sh 'terraform init'
+          }
       }
     }
 
     stage('plan') {
       steps {
-          sh 'terraform plan -out=tfplan'
+          container('terraform') {
+            sh 'terraform plan -out=tfplan'
+          }
       }
     }
 
@@ -28,10 +29,12 @@ pipeline {
             }
         }
     }  
-      
+
     stage('apply') {
       steps {
-         sh 'terraform apply tfplan'
+          container('terraform') {
+            sh 'terraform apply tfplan'
+          }
       }
     }
   }
