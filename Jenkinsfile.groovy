@@ -1,27 +1,19 @@
-pipeline {  
-  stages {
-    stage('checkout') {
-      steps {
+node {
+
+    stage("checkout") {
         checkout scm
-      }
     }
- 
-    stage('init') {
-      steps {
+
+    stage("init") {
         sh 'terraform init'
-      }
     }
- 
-    stage('plan') {
-      steps {
+
+    stage("plan") {
         sh 'terraform plan -out=tfplan'
-      }
     }
- 
-    stage('apply') {
-      steps {
+
+    stage("apply") {
         sh 'terraform apply tfplan'
-      }
     }
-  }
+
 }
