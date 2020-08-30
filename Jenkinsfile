@@ -11,7 +11,7 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh '/etc/*release'
+            sh 'cat /etc/*release'
       }
     }
     
