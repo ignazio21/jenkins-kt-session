@@ -11,7 +11,7 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh 'docker run -i -t hashicorp/terraform:light plan nginx.tf'
+            sh 'docker run -i -t hashicorp/terraform:light plan'
       }
     }
     
