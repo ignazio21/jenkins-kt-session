@@ -11,8 +11,8 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh 'which docker'
-            sh 'systemctl start docker'
+            sh 'apk add --update docker openrc'
+            sh 'rc-update add docker boot'
             sh 'docker run hashicorp/terraform:light plan nginx.tf'
       }
     }
