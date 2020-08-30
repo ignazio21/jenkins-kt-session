@@ -11,8 +11,7 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh 'ls -la'
-            sh 'which terraform'
+            sh '/etc/*release'
       }
     }
     
