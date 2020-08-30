@@ -9,6 +9,13 @@ pipeline {
       }
     }
 
+    stage('check terraform installation') {
+      steps {
+            sh 'ls -la'
+            sh 'which terraform'
+      }
+    }
+    
     stage('init') {
       steps {
             sh 'terraform init'
