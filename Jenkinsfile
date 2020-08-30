@@ -11,12 +11,7 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh 'set TERRAFORM_VERSION=0.12.7'
-            sh 'cd /usr/local/bin && \
-                curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-                unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
-                rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip'
-            sh 'terraform -version'
+            sh 'docker -version'
       }
     }
     
