@@ -11,7 +11,13 @@ pipeline {
 
     stage('check terraform installation') {
       steps {
-            sh 'cat /etc/*release'
+            sh 'env TERRAFORM_VERSION=0.12.7'
+            sh 'apk --update --no-cache add libc6-compat git openssh-client python py-pip python3 && pip install awscli'
+            sh 'cd /usr/local/bin && \
+                curl https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+                unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip && \
+                rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip'
+            sh 'terraform -version'
       }
     }
     
