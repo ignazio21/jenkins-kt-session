@@ -11,17 +11,13 @@ pipeline {
 
     stage('init') {
       steps {
-          container('terraform') {
             sh 'terraform init'
-          }
       }
     }
 
     stage('plan') {
       steps {
-          container('terraform') {
             sh 'terraform plan -out=tfplan'
-          }
       }
     }
 
@@ -35,9 +31,7 @@ pipeline {
 
     stage('apply') {
       steps {
-          container('terraform') {
             sh 'terraform apply tfplan'
-          }
       }
     }
   }
