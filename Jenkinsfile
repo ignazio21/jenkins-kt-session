@@ -8,23 +8,16 @@ pipeline {
         checkout scm
       }
     }
-
-    stage('check terraform installation') {
-      steps {
-            sh 'rc-update add docker boot'
-            sh 'docker run hashicorp/terraform:light plan nginx.tf'
-      }
-    }
     
     stage('init') {
       steps {
-            sh 'docker run hashicorp/terraform:light init'
+            sh 'terraform init'
       }
     }
 
     stage('plan') {
       steps {
-            sh 'docker run hashicorp/terraform:light plan nginx.tf'
+            sh 'terraform plan -out=tfplan'
       }
     }
 
