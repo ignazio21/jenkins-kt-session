@@ -17,13 +17,21 @@ pipeline {
 
     stage('plan') {
       steps {
-            sh 'terraform plan -destroy'
+            sh 'terraform plan -out=tfplan'
       }
     }
+    
+    stage('approval') {
+        steps {
+            script {
+                def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+            }
+        }
+    }  
 
-    stage('destroy') {
+    stage('apply') {
       steps {
-            sh 'terraform destroy -force'
+            sh 'terraform apply tfplan'
       }
     }
   }
