@@ -1,37 +1,26 @@
 pipeline {   
-  
-  agent any
-  
   stages {
     stage('checkout') {
       steps {
         checkout scm
       }
     }
-    
+
     stage('init') {
       steps {
-            sh 'terraform init'
+        sh 'terraform init'
       }
     }
 
     stage('plan') {
       steps {
-            sh 'terraform plan -out=tfplan'
+        sh 'terraform plan -destroy'
       }
     }
-    
-    stage('approval') {
-        steps {
-            script {
-                def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-            }
-        }
-    }  
 
-    stage('apply') {
+    stage('destroy') {
       steps {
-            sh 'terraform apply tfplan'
+        sh 'terraform destroy -force'
       }
     }
   }
