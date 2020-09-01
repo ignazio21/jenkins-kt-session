@@ -21,15 +21,7 @@ pipeline {
       }
     }
 
-    stage('approval') {
-        steps {
-            script {
-                def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-            }
-        }
-    }  
-
-    stage('apply') {
+    stage('destroy') {
       steps {
             sh 'terraform destroy'
       }
