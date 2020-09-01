@@ -23,7 +23,7 @@ pipeline {
 
     stage('destroy') {
       steps {
-            sh 'terraform destroy'
+            sh 'terraform destroy -force'
       }
     }
   }
