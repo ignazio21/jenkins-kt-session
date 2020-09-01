@@ -1,4 +1,10 @@
 provider "docker" {}
+
+terraform {
+  backend "local" {
+    path = "terraform.tfstate"
+  }
+}
  
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
