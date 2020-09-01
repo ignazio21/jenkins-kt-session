@@ -17,7 +17,7 @@ pipeline {
 
     stage('plan') {
       steps {
-            sh 'terraform plan -destroy -out=destplan’
+            sh 'terraform plan -destroy -out=destplan'
       }
     }
 
@@ -31,7 +31,7 @@ pipeline {
 
     stage('apply') {
       steps {
-            sh 'terraform destroy destplan’
+            sh 'terraform destroy destplan'
       }
     }
   }
