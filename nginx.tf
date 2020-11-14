@@ -16,6 +16,6 @@ resource "docker_container" "nginx" {
   name  = "tutorial"
   ports {
     internal = 80
-    external = 8005
+    external = 8007
   }
 }
